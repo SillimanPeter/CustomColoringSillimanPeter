@@ -11,13 +11,13 @@ public class PictureView extends SurfaceView
 {
     //paints used to draw the picture
     Paint skyPaint = new Paint();
-    Paint backDropPaint = new Paint();
-    Paint wallPaint = new Paint();
+    Paint groundPaint = new Paint();
+    Paint housePaint = new Paint();
     Paint roofPaint = new Paint();
-    Paint houseTrimPaint = new Paint();
+    Paint sunPaint = new Paint();
     Paint doorPaint = new Paint();
 
-    private PictureModel pModel;
+    private PictureModel pictureModel;
 
     public PictureView(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -28,20 +28,20 @@ public class PictureView extends SurfaceView
         //Setup color palette
         skyPaint.setColor(Color.BLUE);
         skyPaint.setStyle(Paint.Style.FILL);
-        backDropPaint.setColor(Color.GREEN);
-        backDropPaint.setStyle(Paint.Style.FILL);
-        wallPaint.setColor(Color.CYAN);
-        wallPaint.setStyle(Paint.Style.FILL);
+        groundPaint.setColor(Color.GREEN);
+        groundPaint.setStyle(Paint.Style.FILL);
+        housePaint.setColor(Color.CYAN);
+        housePaint.setStyle(Paint.Style.FILL);
         roofPaint.setColor(Color.DKGRAY);
         roofPaint.setStyle(Paint.Style.FILL);
-        houseTrimPaint.setColor(Color.WHITE);
-        houseTrimPaint.setStyle(Paint.Style.FILL);
-        doorPaint.setColor(Color.YELLOW);
+        sunPaint.setColor(Color.YELLOW);
+        sunPaint.setStyle(Paint.Style.FILL);
+        doorPaint.setColor(Color.WHITE);
         doorPaint.setStyle(Paint.Style.FILL);
 
-        setBackgroundColor(Color.GRAY);
+        setBackgroundColor(Color.WHITE);
 
-        pModel = new PictureModel();
+        pictureModel = new PictureModel();
 
     }
 
@@ -55,9 +55,10 @@ public class PictureView extends SurfaceView
     @Override
     public void onDraw(Canvas canvas)
     {
-
+        canvas.drawRect(0, 0, getWidth(), getHeight(), skyPaint);
+        canvas.drawRect(0, getHeight()/2, getWidth(), getHeight(), groundPaint);
     }
 
-    public PictureModel getPictureModel(){ return this.pModel; }
+    public PictureModel getPictureModel(){ return this.pictureModel; }
 
 }

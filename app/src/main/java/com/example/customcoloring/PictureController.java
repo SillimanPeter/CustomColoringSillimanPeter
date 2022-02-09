@@ -2,6 +2,7 @@ package com.example.customcoloring;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
@@ -21,6 +22,8 @@ public class PictureController implements SeekBar.OnSeekBarChangeListener {
         if (viewSlider.getId() == R.id.redSeekBar) {
             Log.d("RedCount", "Changed to " + progress);
             pictureModel.redCount(progress);
+            //Button rView = findViewById(R.id.redTextView);
+            //rView.setText(progress + " Red");
         } else if (viewSlider.getId() == R.id.greenSeekBar) {
             Log.d("GreenCount", "Changed to " + progress);
             pictureModel.greenCount(progress);

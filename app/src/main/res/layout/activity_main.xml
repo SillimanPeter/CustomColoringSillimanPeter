@@ -11,8 +11,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <SurfaceView
-            android:id="@+id/surfaceView"
+        <com.example.customcoloring.PictureView
+            android:id="@+id/pictureView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -42,21 +42,21 @@
                     android:id="@+id/redTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
+                    android:layout_margin="3dp"
                     android:text="Red" />
 
                 <TextView
                     android:id="@+id/greenTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
+                    android:layout_margin="3dp"
                     android:text="Green" />
 
                 <TextView
                     android:id="@+id/blueTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
+                    android:layout_margin="3dp"
                     android:text="Blue" />
 
             </LinearLayout>
