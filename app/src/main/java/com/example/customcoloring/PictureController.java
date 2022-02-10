@@ -10,6 +10,10 @@ import android.widget.TextView;
 public class PictureController implements SeekBar.OnSeekBarChangeListener,
                                             View.OnTouchListener {
 
+    /**
+     * These creates local View, Seekbar and Rectangle objects
+     * so we can pass in the objects to get and set their texts and values
+     */
     private PictureView pictureView;
     private TextView redView;
     private TextView greenView;
@@ -18,10 +22,9 @@ public class PictureController implements SeekBar.OnSeekBarChangeListener,
     private SeekBar redBar;
     private SeekBar greenBar;
     private SeekBar blueBar;
-
     private RectangleObject activeObj;
 
-
+    /** sets local object equal to the passed in objects */
     PictureController(PictureView view, TextView rView,
                       TextView gView, TextView bView, TextView eView,
                       SeekBar rBar, SeekBar gBar, SeekBar bBar)
@@ -36,22 +39,25 @@ public class PictureController implements SeekBar.OnSeekBarChangeListener,
         blueBar = bBar;
     }
 
+    /** sets the color of the ActiveObject and the RGB TextViews to match the RGB Seekbar progress */
     public void onProgressChanged(SeekBar viewSlider, int progress, boolean fromUser)
     {
+    //check witch SeekBar is changing and set the respective textview and rectangles RGB to progress
         if (viewSlider.getId() == R.id.redSeekBar) {
             Log.d("RedCount", "Changed to " + progress);
-            activeObj.setColor(progress, activeObj.getG(), activeObj.getB());
+            this.activeObj.setColor(progress, activeObj.getG(), activeObj.getB());
             this.redView.setText("" + progress);
         } else if (viewSlider.getId() == R.id.greenSeekBar) {
             Log.d("GreenCount", "Changed to " + progress);
-            activeObj.setColor(activeObj.getR(), progress, activeObj.getB());
+            this.activeObj.setColor(activeObj.getR(), progress, activeObj.getB());
             this.greenView.setText("" + progress);
         } else if (viewSlider.getId() == R.id.blueSeekBar) {
             Log.d("BlueCount", "Changed to " + progress);
-            activeObj.setColor(activeObj.getR(), activeObj.getG(), progress);
+            this.activeObj.setColor(activeObj.getR(), activeObj.getG(), progress);
             this.blueView.setText("" + progress);
         }
 
+        //is necessary to redraw the PictureView with the new Rectangle Object colors
         pictureView.invalidate();
 
     }
@@ -65,24 +71,30 @@ public class PictureController implements SeekBar.OnSeekBarChangeListener,
         this.greenView.setText("" + rect.getG());
         this.blueView.setText("" + rect.getB());
 
-        redBar.setProgress(rect.getR());
-        greenBar.setProgress(rect.getG());
-        blueBar.setProgress(rect.getB());
+        this.redBar.setProgress(rect.getR());
+        this.greenBar.setProgress(rect.getG());
+        this.blueBar.setProgress(rect.getB());
 
-        pictureView.invalidate();
+        this.pictureView.invalidate();
     }
 
+    //method is needed for implemented OnTouchListener
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) { }
-
+    //method is needed for implemented OnTouchListener
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) { }
 
+    /**  */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         int x = (int) motionEvent.getX();
         int y = (int) motionEvent.getY();
 
+        /**
+         * finds which rectObj is being clicked (checks in opposite order they are drawn to avoid
+         * calling more than one objects because they overlap)
+         */
         if(pictureView.doorR.containsPoint(x, y)) {
             Log.d("onTouch","touchedDoor");
             setActiveObject(pictureView.doorR);

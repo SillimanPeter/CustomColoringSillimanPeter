@@ -33,6 +33,7 @@ public class RectangleObject {
      */
     protected String myName = "Element has no name";
 
+
     public RectangleObject(String name, int color, int left, int top, int right, int bottom){
 
         this.myName = name;
