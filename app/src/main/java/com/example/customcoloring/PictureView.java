@@ -3,12 +3,16 @@ package com.example.customcoloring;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceView;
 
+/**
+ * PictureView is the View of MVC, containing onDraw method for rect objects
+ *
+ * @author Peter Silliman
+ * @version Feb 2022
+ */
 public class PictureView extends SurfaceView
 {
 

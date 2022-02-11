@@ -6,14 +6,13 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
 
-import java.util.Random;
-
 /**
- * <!-- class CustomElement -->
+ * RectangleObject creates/edits/draws rectangle objects and acts as the model
  *
- * This class is the combination of CustomElement and CustomRect classes
- * defines an element of a drawing. All such elements must have
- * certain methods and variables to work with this app.
+ * @author Peter Silliman
+ * @version Feb 2022
+ *
+ * This class is a modified combination of CustomElement and CustomRect classes by...
  *
  * @author Andrew Nuxoll
  * @version Spring 2015
@@ -33,22 +32,23 @@ public class RectangleObject {
      */
     protected String myName = "Element has no name";
 
-
-    public RectangleObject(String name, int color, int left, int top, int right, int bottom){
-
+    /** instantiates this Rectangle Object with name, color and size */
+    public RectangleObject(String name, int color, int left, int top, int right, int bottom)
+    {
         this.myName = name;
         this.myRect = new Rect(left, top, right, bottom);
         this.myPaint.setColor(color);
-        this.myPaint.setStyle(Paint.Style.FILL);
-
+        this.myPaint.setStyle(Paint.Style.FILL); //the paint style will be Fill for all objects
     }
 
+    /** draws the rectangle object */
     public void drawMe(Canvas canvas){
         canvas.drawRect(myRect.left, myRect.top,
                 myRect.right, myRect.bottom, myPaint);
         Log.d("DrawME","Called");
     }
 
+    /** checks if OnTouched has touched a point inside this rectangle object */
     public boolean containsPoint(int x, int y){
         int left = this.myRect.left;
         int top = this.myRect.top;
@@ -59,6 +59,7 @@ public class RectangleObject {
         return r.contains(x, y);
     }//containsPoint
 
+    /** set Color of this rectangle object */
     public void setColor(int red, int green, int blue){
         Paint p = new Paint();
         p.setARGB(255, red, green, blue);

@@ -1,12 +1,17 @@
 package com.example.customcoloring;
 
-import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+/**
+ * PictureController uses Listeners to set and change values of each TextViews/SeekBars
+ *
+ * @author Peter Silliman
+ * @version Feb 2022
+ */
 public class PictureController implements SeekBar.OnSeekBarChangeListener,
                                             View.OnTouchListener {
 
@@ -62,20 +67,22 @@ public class PictureController implements SeekBar.OnSeekBarChangeListener,
 
     }
 
+    /** sets TextViews and SeekBars to the object's values */
     public void setActiveObject(RectangleObject rect)
     {
+        //sets up local rectangle object for onProgressChanged
         this.activeObj = rect;
-        this.elementView.setText(rect.getName());
 
+        //sets TextViews to display color values and name of the selected object
+        this.elementView.setText(rect.getName());
         this.redView.setText("" + rect.getR());
         this.greenView.setText("" + rect.getG());
         this.blueView.setText("" + rect.getB());
 
+        //sets SeekBars' progress to object's color values
         this.redBar.setProgress(rect.getR());
         this.greenBar.setProgress(rect.getG());
         this.blueBar.setProgress(rect.getB());
-
-        this.pictureView.invalidate();
     }
 
     //method is needed for implemented OnTouchListener
@@ -85,7 +92,7 @@ public class PictureController implements SeekBar.OnSeekBarChangeListener,
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) { }
 
-    /**  */
+    /** uses OnTouchListener to find which object is being selected and edited */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         int x = (int) motionEvent.getX();
@@ -94,6 +101,7 @@ public class PictureController implements SeekBar.OnSeekBarChangeListener,
         /**
          * finds which rectObj is being clicked (checks in opposite order they are drawn to avoid
          * calling more than one objects because they overlap)
+         * calls setActiveObject() to set TextViews and Seekbars to the object's values
          */
         if(pictureView.doorR.containsPoint(x, y)) {
             Log.d("onTouch","touchedDoor");
